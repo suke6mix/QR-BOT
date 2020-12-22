@@ -2,15 +2,23 @@ class LinebotController < ApplicationController
     # gem 'line-bot-api'
     require 'line/bot'
 
+    # If you using rails 6 and use ngrok in development
+    # you must edit the development.rb file in 
+    # config/environments for add config.hosts << "a0000000.ngrok.io" 
+    # where a0000000.ngrok.io is the url supplied by ngrok without https:// , 
+    # if this no work so you must add skip_before_action :verify_authenticity_token in you controller.
+    # skip_before_action :verify_authenticity_token
+
     # callbackアクションの
     # CSRF（クロスサイトリクエストフォージェリ）トークン認証を無効
     protect_from_forgery :except => [:callback]
 
     def client
         @client ||= Line::Bot::Client.new { |config|
+            #config.channel_id = ENV["LINE_CHANNEL_ID"]
             config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
             config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
-    }
+        }
     end
 
     def callback
