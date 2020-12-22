@@ -53,8 +53,11 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-#LINE Messaging API SDK for Ruby
+# LINE Messaging API SDK for Ruby
 gem 'line-bot-api'
 
-#access tokenなど管理
+# access tokenなど管理
 gem 'dotenv-rails' 
+
+# QR code作成ライブラリ
+gem 'rqrcode'
