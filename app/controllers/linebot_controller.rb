@@ -1,6 +1,7 @@
 class LinebotController < ApplicationController
     # gem 'line-bot-api'
     require 'line/bot'
+    require 'rqrcode'
 
     # If you using rails 6 and use ngrok in development
     # you must edit the development.rb file in 

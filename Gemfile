@@ -61,3 +61,4 @@ gem 'dotenv-rails'
 
 # QR code作成ライブラリ
 gem 'rqrcode'
+gem 'rqrcode_png'
