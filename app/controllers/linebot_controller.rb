@@ -2,6 +2,8 @@ class LinebotController < ApplicationController
     # gem 'line-bot-api'
     require 'line/bot'
     require 'rqrcode'
+    require 'rqrcode_png'
+    require 'chunky_png'
 
     # If you using rails 6 and use ngrok in development
     # you must edit the development.rb file in 
@@ -40,12 +42,25 @@ class LinebotController < ApplicationController
                 case event.type
                 # 入力値がテキストタイプの時に反応する
                 when Line::Bot::Event::MessageType::Text
+
+                    # QRcode生成（pending）
+                    content = event.message['text']
+                    # qr = RQRCode::QRCode.new(content)
+                    # png = qr.as_png
+
                     # どのような返信にするか指定する
                     message = {
-                        # タイプをテキストにする
+                        # タイプを設定する
                         type: 'text',
-                        # テキストの内容
-                        text: event.message['text']
+                        #type: 'image',
+                        
+                        # 内容を設定する
+                        #text: event.message['text']
+                        text: "https://example/#{content}"
+                        #originalContentUrl: 'https://i.pinimg.com/236x/6f/47/5c/6f475cd23b866c85024ae61065ca373f.jpg',
+                        #previewImageUrl: 'https://i.pinimg.com/236x/6f/47/5c/6f475cd23b866c85024ae61065ca373f.jpg'
+                        #originalContentUrl: png,
+                        #previewImageUrl: png
                     }
                     # reply時にコード実行
                     client.reply_message(event['replyToken'], message)
